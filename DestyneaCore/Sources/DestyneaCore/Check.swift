@@ -6,10 +6,12 @@
 //
 
 enum Check {
-    case success
-    case failure
-    
-    static func resolve(roll: Int, score: Int) -> Check {
+    enum Outcome {
+        case success
+        case failure
+    }
+
+    static func resolve(roll: Int, score: Int) -> Outcome {
         roll <= score ? .success : .failure
     }
 }
