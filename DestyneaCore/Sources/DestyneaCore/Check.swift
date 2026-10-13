@@ -13,8 +13,8 @@ enum Check {
         case criticalFailure
     }
 
-    static func resolve(roll: Int, score: Int) -> Outcome {
-        switch roll {
+    static func resolve(roll: D100, score: Int) -> Outcome {
+        switch roll.value {
         case 1...5: .criticalSuccess
         case 96...100: .criticalFailure
         case ...score: .success
