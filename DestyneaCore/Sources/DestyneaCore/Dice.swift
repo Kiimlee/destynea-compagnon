@@ -11,6 +11,6 @@ protocol Dice {
 
 struct RandomDice: Dice {
     func roll() -> D100 {
-        return D100(Int.random(in: 1...100))!   // sûr : la plage garantit une valeur valide
+        return D100(Int.random(in: D100.range))!   // sûr : la plage garantit une valeur valide
     }
 }

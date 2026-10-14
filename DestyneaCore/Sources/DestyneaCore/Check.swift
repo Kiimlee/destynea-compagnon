@@ -22,7 +22,7 @@ enum Check {
         }
     }
     
-    static func roll(score: Int, using dice: Dice) -> Outcome {
+    static func roll(score: Int, using dice: Dice = RandomDice()) -> Outcome {
         return self.resolve(roll: dice.roll(), score: score)
     }
 }

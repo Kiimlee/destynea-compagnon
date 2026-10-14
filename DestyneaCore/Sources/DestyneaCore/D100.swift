@@ -6,10 +6,11 @@
 //
 
 struct D100 {
+    static let range = 1...100
     let value: Int
-    
+
     init?(_ value: Int) {
-        guard (1...100).contains(value) else { return nil }
+        guard Self.range.contains(value) else { return nil }
         self.value = value
     }
 }
