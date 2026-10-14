@@ -21,4 +21,8 @@ enum Check {
         default: .failure
         }
     }
+    
+    static func roll(score: Int, using dice: Dice) -> Outcome {
+        return self.resolve(roll: dice.roll(), score: score)
+    }
 }

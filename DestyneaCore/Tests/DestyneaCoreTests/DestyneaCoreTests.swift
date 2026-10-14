@@ -25,7 +25,7 @@ import Testing
     #expect(result == .criticalSuccess)
 }
 
-@Test func rollSuccessWinsEvenAboveScore() throws {
+@Test func criticalSuccessWinsEvenAboveScore() throws {
     let roll = try #require(D100(3))
     let result = Check.resolve(roll: roll, score: 2)
     #expect(result == .criticalSuccess)
@@ -35,4 +35,16 @@ import Testing
     let roll = try #require(D100(97))
     let result = Check.resolve(roll: roll, score: 99)
     #expect(result == .criticalFailure)
+}
+
+@Test func rollUsesTheDiceResultAndIsCriticalFailure() throws {
+    let dice = LoadedDice(value: try #require(D100(97)))
+    let result = Check.roll(score: 99, using: dice)
+    #expect(result == .criticalFailure)
+}
+
+@Test func rollUsesTheDiceResultAndIsCriticalSuccess() throws {
+    let dice = LoadedDice(value: try #require(D100(3)))
+    let result = Check.roll(score: 2, using: dice)
+    #expect(result == .criticalSuccess)
 }
