@@ -1,3 +1,10 @@
+//
+//  KarmaCoinTests.swift
+//  DestyneaCore
+//
+//  Created by Willy Kim on 11/10/2026.
+//
+
 import Testing
 @testable import DestyneaCore
 
