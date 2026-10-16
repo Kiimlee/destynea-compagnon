@@ -31,6 +31,10 @@ struct KarmaPurse {
         return total
     }
     
+    mutating func loseUnusedCoins() {
+        coins.removeAll()
+    }
+    
     func count(of coin: KarmaCoin) -> Int {
         return coins.count(where: { $0 == coin })
     }

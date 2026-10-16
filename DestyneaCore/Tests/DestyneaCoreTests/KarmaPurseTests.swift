@@ -100,3 +100,22 @@ func addingCoinBeyondLimitIsRefused(coin: KarmaCoin, limit: Int) {
     let _ = try purse.spend([.copper])
     #expect(purse.count(of: .silver) == 1)
 }
+
+@Test func losingUnusedCoinsEmptiesEveryType() {
+    var purse = KarmaPurse()
+    purse.add(.copper)
+    purse.add(.silver)
+    purse.add(.gold)
+    purse.loseUnusedCoins()
+    #expect(purse.count(of: .copper) == 0)
+    #expect(purse.count(of: .silver) == 0)
+    #expect(purse.count(of: .gold) == 0)
+}
+
+@Test func losingCoinsFromEmptyPurseDoesNothing() {
+    var purse = KarmaPurse()
+    purse.loseUnusedCoins()
+    #expect(purse.count(of: .copper) == 0)
+    #expect(purse.count(of: .silver) == 0)
+    #expect(purse.count(of: .gold) == 0)
+}
