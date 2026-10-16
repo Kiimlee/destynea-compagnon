@@ -44,3 +44,10 @@ func addingCoinBeyondLimitIsRefused(coin: KarmaCoin, limit: Int) {
     purse.add(.gold)
     #expect(purse.count(of: .gold) == 1)
 }
+
+@Test func copiedPurseIsIndependent() {
+    let kiimleePurse = KarmaPurse()
+    var nyxPurse = kiimleePurse
+    nyxPurse.add(.gold)
+    #expect(kiimleePurse.count(of: .gold) == 0)
+}
