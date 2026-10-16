@@ -51,3 +51,52 @@ func addingCoinBeyondLimitIsRefused(coin: KarmaCoin, limit: Int) {
     nyxPurse.add(.gold)
     #expect(kiimleePurse.count(of: .gold) == 0)
 }
+
+@Test func spendingCopperGivesThreeAndRemovesIt() throws {
+    var purse = KarmaPurse()
+    purse.add(.copper)
+    let result = try purse.spend([.copper])
+    #expect(result == 3)
+    #expect(purse.count(of: .copper) == 0)
+}
+
+@Test func spendCoinsOfEach() throws {
+    var purse = KarmaPurse()
+    purse.add(.copper)
+    purse.add(.silver)
+    purse.add(.gold)
+    let result = try purse.spend([.copper, .silver, .gold])
+    #expect(result == 18)
+}
+
+@Test func spendingNothingGivesZeroAndKeepsPurse() throws {
+    var purse = KarmaPurse()
+    purse.add(.copper)
+    let result = try purse.spend([])
+    #expect(result == 0)
+    #expect(purse.count(of: .copper) == 1)
+}
+
+@Test func spendWithEmptyPurse() throws {
+    var purse = KarmaPurse()
+    #expect(throws: KarmaPurseError.coinNotOwned(.gold)) {
+        try purse.spend([.gold])
+    }
+}
+
+@Test func failedSpendKeepsAllCoins() throws {
+    var purse = KarmaPurse()
+    purse.add(.copper)
+    #expect(throws: KarmaPurseError.coinNotOwned(.gold)) {
+        try purse.spend([.copper, .gold])
+    }
+    #expect(purse.count(of: .copper) == 1)
+}
+
+@Test func spendOneCoinIsIndependent() throws {
+    var purse = KarmaPurse()
+    purse.add(.copper)
+    purse.add(.silver)
+    let _ = try purse.spend([.copper])
+    #expect(purse.count(of: .silver) == 1)
+}
