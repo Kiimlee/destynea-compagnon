@@ -9,10 +9,20 @@ struct KarmaPurse {
     private var coins: [KarmaCoin] = []
     
     mutating func add(_ coin: KarmaCoin) {
-        coins.append(coin)
+        switch coin {
+        case .copper:
+            guard count(of: coin) < 3 else { return }
+            coins.append(coin)
+        case .silver:
+            guard count(of: coin) < 2 else { return }
+            coins.append(coin)
+        case .gold:
+            guard count(of: coin) < 1 else { return }
+            coins.append(coin)
+        }
     }
     
     func count(of coin: KarmaCoin) -> Int {
-        return coins.filter { $0 == coin }.count
+        return coins.count(where: { $0 == coin })
     }
 }
