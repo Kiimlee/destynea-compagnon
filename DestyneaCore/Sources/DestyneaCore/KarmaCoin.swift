@@ -16,6 +16,14 @@ enum KarmaCoin {
         }
     }
     
+    var purseLimit: Int {
+        switch self {
+        case .copper: 3
+        case .silver: 2
+        case .gold:   1
+        }
+    }
+    
     static func earned(roll: D100, score: Int) -> KarmaCoin? {
         let result = Check.resolve(roll: roll, score: score)
         guard result == .failure || result == .criticalFailure else { return nil }
