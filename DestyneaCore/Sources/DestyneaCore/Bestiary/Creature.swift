@@ -20,7 +20,8 @@ struct Creature {
     let loots: [Loot]
 }
 
-enum CreatureType {
+/// Le rang d'une créature. L'ordre des `case` définit l'ordre de tri (Comparable).
+enum CreatureType: Comparable {
     case minion
     case soldier
     case elite
