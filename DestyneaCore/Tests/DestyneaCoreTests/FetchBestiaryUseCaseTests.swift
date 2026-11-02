@@ -8,7 +8,7 @@
 import Testing
 @testable import DestyneaCore
 
-@Test func fetchBestiaryAndIsSortedByType() async throws {
+@Test func bestiaryIsSortedByRank() async throws {
     let useCase = FetchBestiaryUseCase(repository: StubCreatureRepository(creatures: [
         .fixture(name: "Zombie", type: .soldier),
         .fixture(name: "Gobelin", type: .minion),
@@ -19,7 +19,7 @@ import Testing
     #expect(result.map(\.name) == ["Gobelin", "Zombie", "Nécromancien", "Jeune dragofeu"])
 }
 
-@Test func fetchBestiaryAndIsSortedByLetters() async throws {
+@Test func sameRankIsSortedAlphabetically() async throws {
     let useCase = FetchBestiaryUseCase(repository: StubCreatureRepository(creatures: [
         .fixture(name: "Squelette", type: .minion),
         .fixture(name: "Gobelin", type: .minion),
@@ -28,7 +28,7 @@ import Testing
     #expect(result.map(\.name) == ["Gobelin", "Squelette"])
 }
 
-@Test func fetchBestiaryAndIsSortedByRank() async throws {
+@Test func rankWinsOverName() async throws {
     let useCase = FetchBestiaryUseCase(repository: StubCreatureRepository(creatures: [
         .fixture(name: "Zombie", type: .minion),
         .fixture(name: "Abomination", type: .boss),
@@ -37,13 +37,13 @@ import Testing
     #expect(result.map(\.name) == ["Zombie", "Abomination"])
 }
 
-@Test func fetchBestiaryAndIsEmpty() async throws {
+@Test func emptyBestiaryGivesEmptyList() async throws {
     let useCase = FetchBestiaryUseCase(repository: StubCreatureRepository(creatures: []))
     let result = try await useCase.execute()
     #expect(result.isEmpty)
 }
 
-@Test func fetchBestiaryAndIsSortedLetter2() async throws {
+@Test func accentedNamesAreSortedLikeInFrench() async throws {
     let useCase = FetchBestiaryUseCase(repository: StubCreatureRepository(creatures: [
         .fixture(name: "Gobelin", type: .minion),
         .fixture(name: "Élémentaire", type: .minion),
@@ -52,7 +52,7 @@ import Testing
     #expect(result.map(\.name) == ["Élémentaire", "Gobelin"])
 }
 
-@Test func fetchBestiaryAndErrorIsHandled() async throws {
+@Test func repositoryErrorIsPropagated() async throws {
     let useCase = FetchBestiaryUseCase(repository: FailingCreatureRepository())
     
     await #expect(throws: FailingCreatureRepository.FetchError.self) {
