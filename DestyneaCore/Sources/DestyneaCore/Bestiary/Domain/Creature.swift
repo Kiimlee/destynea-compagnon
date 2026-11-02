@@ -8,8 +8,8 @@
 struct Creature {
     let name: String
     let type: CreatureType
-    let origin: CreatureOrigin
-    let size: CreatureSize
+    let origin: CreatureOrigin?     // nil si inconnue dans les données
+    let size: CreatureSize?         // nil si inconnue dans les données
     let hitPoints: ClosedRange<Int>
     let movementPoints: Int
     let successRate: ClosedRange<Int>
@@ -26,6 +26,24 @@ enum CreatureType: Comparable {
     case soldier
     case elite
     case boss
+    
+    var defaultHitPoints: ClosedRange<Int> {
+        switch self {
+        case .minion: return 2...4
+        case .soldier: return 4...7
+        case .elite: return 8...12
+        case .boss: return 16...22
+        }
+    }
+    
+    var defaultSuccessRate: ClosedRange<Int> {
+        switch self {
+        case .minion: return 40...50
+        case .soldier: return 50...60
+        case .elite: return 60...70
+        case .boss: return 70...80
+        }
+    }
 }
 
 enum CreatureOrigin {
@@ -99,4 +117,16 @@ enum LootRarity {
     case rare
     case epic
     case legendary
+}
+
+extension CreatureType {
+    init?(json: String) {
+        switch json {
+        case "minion": self = .minion
+        case "soldier": self = .soldier
+        case "elite": self = .elite
+        case "boss": self = .boss
+        default: return nil          // rang inconnu → nil → monstre ignoré
+        }
+    }
 }
