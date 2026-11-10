@@ -5,7 +5,7 @@
 //  Created by Willy Kim on 26/10/2026.
 //
 
-struct Creature {
+struct Creature: Equatable {
     let name: String
     let type: CreatureType
     let origin: CreatureOrigin?     // nil si inconnue dans les données
@@ -84,18 +84,18 @@ enum DamageType {
     case light
 }
 
-struct Capacity {
+struct Capacity: Equatable {
     let type: CapacityType
     let description: String
     let effects: String
 }
 
-enum CapacityType {
+enum CapacityType: Equatable {
     case passive
     case active(actionCost: Int, range: Int, rollIsRequired: Bool)
 }
 
-struct Loot {
+struct Loot: Equatable {
     let type: LootType
     let rarity: LootRarity
     let name: String
