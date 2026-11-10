@@ -25,12 +25,7 @@ final class BestiaryViewModel {
     func load() async {
         state = .loading
         do {
-            let result = try await useCase.execute()
-            if result.isEmpty {
-                state = .empty
-            } else {
-                state = .loaded(result)
-            }
+            state = state(for: try await useCase.execute())
         } catch {
             state = .failed
         }
@@ -38,14 +33,13 @@ final class BestiaryViewModel {
 
     func refresh() async {
         do {
-            let result = try await useCase.execute()
-            if result.isEmpty {
-                state = .empty
-            } else {
-                state = .loaded(result)
-            }
+            state = state(for: try await useCase.execute())
         } catch {
             print("keep previous list")
         }
+    }
+    
+    private func state(for creatures: [Creature]) -> BestiaryState {
+        creatures.isEmpty ? .empty : .loaded(creatures)
     }
 }
