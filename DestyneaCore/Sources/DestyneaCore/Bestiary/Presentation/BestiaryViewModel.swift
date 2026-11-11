@@ -7,7 +7,7 @@
 
 import Observation
 
-enum BestiaryState: Equatable {
+public enum BestiaryState: Equatable, Sendable {
     case loading
     case loaded([Creature])
     case empty
@@ -16,13 +16,13 @@ enum BestiaryState: Equatable {
 
 @MainActor
 @Observable
-final class BestiaryViewModel {
-    private(set) var state: BestiaryState = .loading
+public final class BestiaryViewModel {
+    public private(set) var state: BestiaryState = .loading
     private let useCase: FetchBestiaryUseCase
 
-    init(useCase: FetchBestiaryUseCase) { self.useCase = useCase }
+    public init(useCase: FetchBestiaryUseCase) { self.useCase = useCase }
 
-    func load() async {
+    public func load() async {
         state = .loading
         do {
             state = state(for: try await useCase.execute())
@@ -31,7 +31,7 @@ final class BestiaryViewModel {
         }
     }
 
-    func refresh() async {
+    public func refresh() async {
         do {
             state = state(for: try await useCase.execute())
         } catch {

@@ -7,10 +7,14 @@
 
 import Foundation
 
-struct JSONCreatureRepository: CreatureRepository {
+public struct JSONCreatureRepository: CreatureRepository {
     let data: Data
 
-    func fetch() async throws -> [Creature] {
+    public init(data: Data) {
+        self.data = data
+    }
+
+    public func fetch() async throws -> [Creature] {
         let items = try JSONDecoder().decode([Lenient<CreatureDTO>].self, from: data)
         return items.compactMap { $0.value?.toDomain() }
     }

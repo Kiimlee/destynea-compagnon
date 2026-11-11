@@ -7,10 +7,14 @@
 
 import Foundation
 
-struct FetchBestiaryUseCase {
+public struct FetchBestiaryUseCase: Sendable {
     let repository: CreatureRepository
+
+    public init(repository: any CreatureRepository) {
+        self.repository = repository
+    }
     
-    func execute() async throws -> [Creature] {
+    public func execute() async throws -> [Creature] {
         let creatures = try await repository.fetch()
         let sortedCreatures = creatures.sorted { lhs, rhs in
             if lhs.type != rhs.type { return lhs.type < rhs.type }   // 1. le rang d'abord

@@ -5,23 +5,23 @@
 //  Created by Willy Kim on 26/10/2026.
 //
 
-struct Creature: Equatable {
-    let name: String
-    let type: CreatureType
-    let origin: CreatureOrigin?     // nil si inconnue dans les données
-    let size: CreatureSize?         // nil si inconnue dans les données
-    let hitPoints: ClosedRange<Int>
-    let movementPoints: Int
-    let successRate: ClosedRange<Int>
-    let resistances: [DamageType: Int]
-    let initiative: Int
-    let description: String
-    let capacities: [Capacity]
-    let loots: [Loot]
+public struct Creature: Equatable, Sendable {
+    public let name: String
+    public let type: CreatureType
+    public let origin: CreatureOrigin?     // nil si inconnue dans les données
+    public let size: CreatureSize?         // nil si inconnue dans les données
+    public let hitPoints: ClosedRange<Int>
+    public let movementPoints: Int
+    public let successRate: ClosedRange<Int>
+    public let resistances: [DamageType: Int]
+    public let initiative: Int
+    public let description: String
+    public let capacities: [Capacity]
+    public let loots: [Loot]
 }
 
 /// Le rang d'une créature. L'ordre des `case` définit l'ordre de tri (Comparable).
-enum CreatureType: Comparable {
+public enum CreatureType: Comparable, Sendable {
     case minion
     case soldier
     case elite
@@ -46,7 +46,7 @@ enum CreatureType: Comparable {
     }
 }
 
-enum CreatureOrigin {
+public enum CreatureOrigin: Sendable {
     case humanoid
     case undead
     case beast
@@ -64,7 +64,7 @@ enum CreatureOrigin {
     case spectral
 }
 
-enum CreatureSize {
+public enum CreatureSize: Sendable {
     case s
     case m
     case l
@@ -72,7 +72,7 @@ enum CreatureSize {
     case xxl
 }
 
-enum DamageType {
+public enum DamageType: Sendable {
     case piercing
     case bludgeoning
     case slashing
@@ -84,25 +84,25 @@ enum DamageType {
     case light
 }
 
-struct Capacity: Equatable {
-    let type: CapacityType
-    let description: String
-    let effects: String
+public struct Capacity: Equatable, Sendable {
+    public let type: CapacityType
+    public let description: String
+    public let effects: String
 }
 
-enum CapacityType: Equatable {
+public enum CapacityType: Equatable, Sendable {
     case passive
     case active(actionCost: Int, range: Int, rollIsRequired: Bool)
 }
 
-struct Loot: Equatable {
-    let type: LootType
-    let rarity: LootRarity
-    let name: String
-    let description: String
+public struct Loot: Equatable, Sendable {
+    public let type: LootType
+    public let rarity: LootRarity
+    public let name: String
+    public let description: String
 }
 
-enum LootType {
+public enum LootType: Sendable {
     case equipment
     case weapon
     case misc
@@ -111,7 +111,7 @@ enum LootType {
     case money
 }
 
-enum LootRarity {
+public enum LootRarity: Sendable {
     case common
     case uncommon
     case rare
@@ -129,4 +129,9 @@ extension CreatureType {
         default: return nil          // rang inconnu → nil → monstre ignoré
         }
     }
+}
+
+// Identité d'une créature pour les listes SwiftUI : son nom est unique dans un bestiaire.
+extension Creature: Identifiable {
+    public var id: String { name }
 }
