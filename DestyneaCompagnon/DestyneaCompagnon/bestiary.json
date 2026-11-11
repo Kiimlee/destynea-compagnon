@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Gobelin",
+    "rank": "minion",
+    "origin": "humanoid",
+    "size": "S",
+    "hitPoints": "2-4",
+    "movementPoints": 7,
+    "successRate": "40-50",
+    "resistances": {},
+    "initiative": 2,
+    "description": "Un petit être verdâtre aux yeux jaunes, armé d'un cimeterre rouillé."
+  },
+  {
+    "name": "Squelette",
+    "rank": "minion",
+    "origin": "undead",
+    "size": "M",
+    "hitPoints": "4-6",
+    "movementPoints": 5,
+    "successRate": "45-55",
+    "resistances": { "piercing": 1, "bludgeoning": -2, "darkness": 1, "light": -2 },
+    "initiative": -1,
+    "description": "Des os blanchis qui cliquettent dans le silence."
+  },
+  {
+    "name": "Feu follet",
+    "rank": "minion",
+    "origin": "spectral",
+    "size": "S",
+    "hitPoints": "2-3",
+    "movementPoints": 8,
+    "successRate": "45-50",
+    "resistances": { "fire": 2, "water": -2 },
+    "initiative": 3,
+    "description": "Une lueur vacillante qui attire les voyageurs hors du chemin."
+  },
+  {
+    "name": "Ours",
+    "rank": "soldier",
+    "origin": "beast",
+    "size": "L",
+    "hitPoints": "5-7",
+    "movementPoints": 6,
+    "successRate": "50-60",
+    "resistances": {},
+    "initiative": 0,
+    "description": "Une masse de muscles et de fourrure, redoutable quand on la dérange."
+  },
+  {
+    "name": "Nécromancien",
+    "rank": "elite",
+    "origin": "humanoid",
+    "size": "M",
+    "hitPoints": "8-12",
+    "movementPoints": 5,
+    "successRate": "60-70",
+    "resistances": { "darkness": 2, "light": -1 },
+    "initiative": 1,
+    "description": "Un mage qui relève les morts pour servir ses desseins."
+  },
+  {
+    "name": "Kraken",
+    "rank": "boss",
+    "origin": "abyssal",
+    "size": "XXL",
+    "hitPoints": "16-22",
+    "movementPoints": 4,
+    "successRate": "70-80",
+    "resistances": { "water": 2, "fire": -1 },
+    "initiative": 2,
+    "description": "Une créature colossale qui surgit des profondeurs pour engloutir les navires."
+  }
+]
