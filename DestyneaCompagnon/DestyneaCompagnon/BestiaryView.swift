@@ -23,7 +23,7 @@ struct BestiaryView: View {
                 VStack(alignment: .leading) {
                     Text(creature.name)
                         .font(.headline)
-                    Text("\(creature.type)")                // ex. « minion » (on traduira plus tard)
+                    Text(creature.type.displayName)                // ex. « minion » (on traduira plus tard)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }

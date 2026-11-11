@@ -1,0 +1,20 @@
+{
+  "configurations": [
+    {
+      "id": "B91821CA-0E3B-4271-817C-615BCE099AD1",
+      "name": "Configuration 1",
+      "options": {}
+    }
+  ],
+  "defaultOptions": {},
+  "testTargets": [
+    {
+      "target": {
+        "containerPath": "container:../DestyneaCore",
+        "identifier": "DestyneaCoreTests",
+        "name": "DestyneaCoreTests"
+      }
+    }
+  ],
+  "version": 1
+}

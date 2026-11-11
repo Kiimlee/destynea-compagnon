@@ -12,6 +12,7 @@
 
 /* Begin PBXFileReference section */
 		000000000000000000000120 /* DestyneaCompagnon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DestyneaCompagnon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49B938B630A47D4900EA1CD1 /* DestyneaCompagnon.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = DestyneaCompagnon.xctestplan; path = ../DestyneaCompagnon.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -35,6 +36,7 @@
 		000000000000000000000001 = {
 			isa = PBXGroup;
 			children = (
+				49B938B630A47D4900EA1CD1 /* DestyneaCompagnon.xctestplan */,
 				000000000000000000000010 /* DestyneaCompagnon */,
 				000000000000000000000020 /* Products */,
 			);
