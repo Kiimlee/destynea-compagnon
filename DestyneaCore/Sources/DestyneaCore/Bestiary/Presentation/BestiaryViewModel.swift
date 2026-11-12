@@ -35,7 +35,7 @@ public final class BestiaryViewModel {
         do {
             state = state(for: try await useCase.execute())
         } catch {
-            print("keep previous list")
+            // A failed refresh keeps the list already shown.
         }
     }
     

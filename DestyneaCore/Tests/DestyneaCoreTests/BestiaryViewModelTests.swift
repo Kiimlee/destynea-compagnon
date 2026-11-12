@@ -64,7 +64,7 @@ import Testing
 
 
 @MainActor
-@Test func succedShowNewList() async {
+@Test func successfulRefreshShowsNewList() async {
     let squelette = Creature.fixture(name: "Squelette")
     let gobelin = Creature.fixture(name: "Gobelin")
     
