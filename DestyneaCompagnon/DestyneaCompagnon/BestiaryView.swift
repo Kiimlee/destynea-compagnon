@@ -2,8 +2,12 @@ import SwiftUI
 import DestyneaCore
 
 struct BestiaryView: View {
-    @State var viewModel: BestiaryViewModel
-    
+    @State private var viewModel: BestiaryViewModel
+
+    init(viewModel: BestiaryViewModel) {
+        _viewModel = State(initialValue: viewModel)
+    }
+
     var body: some View {
         NavigationStack {
             content
@@ -27,6 +31,7 @@ struct BestiaryView: View {
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
+                .accessibilityElement(children: .combine)   // un seul arrêt VoiceOver par monstre
             }
             .refreshable { await viewModel.refresh() }     // pull-to-refresh natif
             
