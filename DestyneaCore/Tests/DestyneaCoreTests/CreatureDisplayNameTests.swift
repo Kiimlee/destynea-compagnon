@@ -8,7 +8,6 @@
 import Testing
 @testable import DestyneaCore
 
-
 @Test(arguments: [
     (CreatureType.minion, "Sbire"),
     (CreatureType.soldier, "Fantassin"),
