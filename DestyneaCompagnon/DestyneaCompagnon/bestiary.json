@@ -20,7 +20,7 @@
     "movementPoints": 5,
     "successRate": "45-55",
     "resistances": { "piercing": 1, "bludgeoning": -2, "darkness": 1, "light": -2 },
-    "initiative": -1,
+    "initiative": 0,
     "description": "Des os blanchis qui cliquettent dans le silence."
   },
   {
