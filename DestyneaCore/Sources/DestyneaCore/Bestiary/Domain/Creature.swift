@@ -72,7 +72,7 @@ public enum CreatureSize: Sendable {
     case xxl
 }
 
-public enum DamageType: Sendable {
+public enum DamageType: Comparable, Sendable {
     case piercing
     case bludgeoning
     case slashing
@@ -82,6 +82,18 @@ public enum DamageType: Sendable {
     case earth
     case darkness
     case light
+    
+    var category: DamageCategory {
+        switch self {
+        case .piercing, .bludgeoning, .slashing: return .physical
+        case .fire, .water, .wind, .earth, .darkness, .light: return .elemental
+        }
+    }
+}
+
+public enum DamageCategory: Sendable {
+    case physical
+    case elemental
 }
 
 public struct Capacity: Equatable, Sendable {
