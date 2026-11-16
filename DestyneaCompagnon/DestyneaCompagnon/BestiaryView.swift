@@ -24,12 +24,14 @@ struct BestiaryView: View {
             
         case .loaded(let creatures):                       // la liste n'existe QUE dans cet état
             List(creatures) { creature in
-                VStack(alignment: .leading) {
-                    Text(creature.name)
-                        .font(.headline)
-                    Text(creature.type.displayName)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                NavigationLink(destination: CreatureDetailView(creature: creature)) {
+                    VStack(alignment: .leading) {
+                        Text(creature.name)
+                            .font(.headline)
+                        Text(creature.type.displayName)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
                 }
                 .accessibilityElement(children: .combine)   // un seul arrêt VoiceOver par monstre
             }
