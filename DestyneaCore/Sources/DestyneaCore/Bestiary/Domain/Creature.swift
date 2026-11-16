@@ -18,6 +18,35 @@ public struct Creature: Equatable, Sendable {
     public let description: String
     public let capacities: [Capacity]
     public let loots: [Loot]
+
+    /// Public car l'init memberwise synthétisé est `internal` : l'app en a besoin (previews).
+    public init(
+        name: String,
+        type: CreatureType,
+        origin: CreatureOrigin?,
+        size: CreatureSize?,
+        hitPoints: ClosedRange<Int>,
+        movementPoints: Int,
+        successRate: ClosedRange<Int>,
+        resistances: [DamageType: Int],
+        initiative: Int,
+        description: String,
+        capacities: [Capacity] = [],
+        loots: [Loot] = []
+    ) {
+        self.name = name
+        self.type = type
+        self.origin = origin
+        self.size = size
+        self.hitPoints = hitPoints
+        self.movementPoints = movementPoints
+        self.successRate = successRate
+        self.resistances = resistances
+        self.initiative = initiative
+        self.description = description
+        self.capacities = capacities
+        self.loots = loots
+    }
 }
 
 /// Le rang d'une créature. L'ordre des `case` définit l'ordre de tri (Comparable).
