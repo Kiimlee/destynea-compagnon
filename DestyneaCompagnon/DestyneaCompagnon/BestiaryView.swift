@@ -3,13 +3,14 @@ import DestyneaCore
 
 struct BestiaryView: View {
     @State private var viewModel: BestiaryViewModel
+    @State private var path: [Creature] = []
 
     init(viewModel: BestiaryViewModel) {
         _viewModel = State(initialValue: viewModel)
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             content
                 .navigationTitle("Bestiaire")
         }
@@ -38,6 +39,15 @@ struct BestiaryView: View {
             .refreshable { await viewModel.refresh() }     // pull-to-refresh natif
             .navigationDestination(for: Creature.self) { creature in
                 CreatureDetailView(creature: creature)
+            }
+            .toolbar {
+                Button {
+                    if let randomCreature = creatures.randomElement() {
+                        path.append(randomCreature)
+                    }
+                } label: {
+                    Label("Monstre au hasard", systemImage: "dice")
+                }
             }
             
         case .empty:
