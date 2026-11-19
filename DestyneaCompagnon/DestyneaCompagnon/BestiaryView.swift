@@ -24,7 +24,7 @@ struct BestiaryView: View {
             
         case .loaded(let creatures):                       // la liste n'existe QUE dans cet état
             List(creatures) { creature in
-                NavigationLink(destination: CreatureDetailView(creature: creature)) {
+                NavigationLink(value: creature) {
                     VStack(alignment: .leading) {
                         Text(creature.name)
                             .font(.headline)
@@ -36,6 +36,9 @@ struct BestiaryView: View {
                 .accessibilityElement(children: .combine)   // un seul arrêt VoiceOver par monstre
             }
             .refreshable { await viewModel.refresh() }     // pull-to-refresh natif
+            .navigationDestination(for: Creature.self) { creature in
+                CreatureDetailView(creature: creature)
+            }
             
         case .empty:
             ContentUnavailableView("Bestiaire vide", systemImage: "book.closed")
