@@ -1,8 +1,6 @@
 import SwiftUI
 import DestyneaCore
 
-import SwiftUI
-import DestyneaCore
 
 @main
 struct MyApp: App {
