@@ -5,7 +5,7 @@
 //  Created by Willy Kim on 26/10/2026.
 //
 
-public struct Creature: Equatable, Sendable {
+public struct Creature: Hashable, Sendable {
     public let name: String
     public let type: CreatureType
     public let origin: CreatureOrigin?     // nil si inconnue dans les données
@@ -50,7 +50,7 @@ public struct Creature: Equatable, Sendable {
 }
 
 /// Le rang d'une créature. L'ordre des `case` définit l'ordre de tri (Comparable).
-public enum CreatureType: Comparable, Sendable {
+public enum CreatureType: Hashable, Comparable, Sendable {
     case minion
     case soldier
     case elite
@@ -75,7 +75,7 @@ public enum CreatureType: Comparable, Sendable {
     }
 }
 
-public enum CreatureOrigin: Sendable {
+public enum CreatureOrigin: Hashable, Sendable {
     case humanoid
     case undead
     case beast
@@ -93,7 +93,7 @@ public enum CreatureOrigin: Sendable {
     case spectral
 }
 
-public enum CreatureSize: Sendable {
+public enum CreatureSize: Hashable, Sendable {
     case s
     case m
     case l
@@ -101,7 +101,7 @@ public enum CreatureSize: Sendable {
     case xxl
 }
 
-public enum DamageType: Comparable, Sendable {
+public enum DamageType: Hashable, Comparable, Sendable {
     case piercing
     case bludgeoning
     case slashing
@@ -125,25 +125,25 @@ public enum DamageCategory: Sendable {
     case elemental
 }
 
-public struct Capacity: Equatable, Sendable {
+public struct Capacity: Hashable, Sendable {
     public let type: CapacityType
     public let description: String
     public let effects: String
 }
 
-public enum CapacityType: Equatable, Sendable {
+public enum CapacityType: Hashable, Sendable {
     case passive
     case active(actionCost: Int, range: Int, rollIsRequired: Bool)
 }
 
-public struct Loot: Equatable, Sendable {
+public struct Loot: Hashable, Sendable {
     public let type: LootType
     public let rarity: LootRarity
     public let name: String
     public let description: String
 }
 
-public enum LootType: Sendable {
+public enum LootType: Hashable, Sendable {
     case equipment
     case weapon
     case misc
@@ -152,7 +152,7 @@ public enum LootType: Sendable {
     case money
 }
 
-public enum LootRarity: Sendable {
+public enum LootRarity: Hashable, Sendable {
     case common
     case uncommon
     case rare
