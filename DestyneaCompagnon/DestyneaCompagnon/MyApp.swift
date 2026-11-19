@@ -4,9 +4,12 @@ import DestyneaCore
 
 @main
 struct MyApp: App {
+    @State private var router = BestiaryRouter()
+
     var body: some Scene {
         WindowGroup {
             BestiaryView(viewModel: makeBestiaryViewModel())
+                .environment(router)
         }
     }
 

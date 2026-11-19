@@ -3,14 +3,15 @@ import DestyneaCore
 
 struct BestiaryView: View {
     @State private var viewModel: BestiaryViewModel
-    @State private var path: [Creature] = []
+    @Environment(BestiaryRouter.self) private var router: BestiaryRouter
 
     init(viewModel: BestiaryViewModel) {
         _viewModel = State(initialValue: viewModel)
     }
 
     var body: some View {
-        NavigationStack(path: $path) {
+        @Bindable var router = router
+        NavigationStack(path: $router.path) {
             content
                 .navigationTitle("Bestiaire")
         }
@@ -43,7 +44,7 @@ struct BestiaryView: View {
             .toolbar {
                 Button {
                     if let randomCreature = creatures.randomElement() {
-                        path.append(randomCreature)
+                        router.show(randomCreature)
                     }
                 } label: {
                     Label("Monstre au hasard", systemImage: "dice")
