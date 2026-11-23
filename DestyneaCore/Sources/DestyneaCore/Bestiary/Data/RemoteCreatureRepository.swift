@@ -11,7 +11,7 @@ public struct RemoteCreatureRepository: CreatureRepository {
     let url: URL
     let client: any HTTPClient
 
-    public init(url: URL, client: HTTPClient) {
+    public init(url: URL, client: any HTTPClient) {
         self.url = url
         self.client = client
     }

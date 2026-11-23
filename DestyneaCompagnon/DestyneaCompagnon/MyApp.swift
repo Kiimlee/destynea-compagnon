@@ -14,9 +14,8 @@ struct MyApp: App {
     }
 
     private func makeBestiaryViewModel() -> BestiaryViewModel {
-        let url = Bundle.main.url(forResource: "bestiary", withExtension: "json")
-        let data = url.flatMap { try? Data(contentsOf: $0) } ?? Data()   // fichier absent → Data vide → état .failed
-        let repository = JSONCreatureRepository(data: data)
+        let url = URL(string: "https://raw.githubusercontent.com/Kiimlee/destynea-compagnon/main/DestyneaCompagnon/DestyneaCompagnon/bestiary.json")!
+        let repository = RemoteCreatureRepository(url: url, client: URLSession.shared)
         return BestiaryViewModel(useCase: FetchBestiaryUseCase(repository: repository))
     }
 }
