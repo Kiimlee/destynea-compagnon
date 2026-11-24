@@ -33,7 +33,7 @@ public final class BestiaryViewModel {
 
     public func refresh() async {
         do {
-            state = state(for: try await useCase.execute())
+            state = state(for: try await useCase.execute(forceRefresh: true))
         } catch {
             // A failed refresh keeps the list already shown.
         }

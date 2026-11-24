@@ -17,9 +17,13 @@ public actor CachedCreatureRepository: CreatureRepository {
         if let cache = creatures {
             return cache
         } else {
-            let newCreatures = try await repository.fetch()
-            creatures = newCreatures
-            return newCreatures
+            return try await refresh()
         }
+    }
+    
+    public func refresh() async throws -> [Creature] {
+        let newCreatures = try await repository.fetch()
+        creatures = newCreatures
+        return newCreatures
     }
 }

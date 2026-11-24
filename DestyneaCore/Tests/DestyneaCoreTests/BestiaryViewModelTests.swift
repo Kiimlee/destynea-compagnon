@@ -95,3 +95,15 @@ import Testing
 
     #expect(viewModel.state == .loaded([squelette]))     // l'ancienne liste est toujours là
 }
+
+@MainActor
+@Test func refreshAsksForFreshCreatures() async {
+    let goblin = Creature.fixture(name: "Gobelin")
+    let kraken = Creature.fixture(name: "Kraken", type: .boss)
+    let viewModel = BestiaryViewModel(useCase: FetchBestiaryUseCase(repository: RefreshableStubRepository(fetched: [goblin], refreshed: [kraken])))
+
+    await viewModel.load()
+    await viewModel.refresh()
+
+    #expect(viewModel.state == .loaded([kraken]))
+}

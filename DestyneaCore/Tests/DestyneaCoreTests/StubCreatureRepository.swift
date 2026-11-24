@@ -17,3 +17,13 @@ struct FailingCreatureRepository: CreatureRepository {
         throw FetchError()
     }
 }
+
+/// Faux repository qui renvoie une liste différente selon qu'on appelle `fetch()` ou `refresh()`,
+/// pour vérifier que l'intention « je veux du frais » arrive bien jusqu'au repository.
+struct RefreshableStubRepository: CreatureRepository {
+    let fetched: [Creature]
+    let refreshed: [Creature]
+
+    func fetch() async throws -> [Creature] { fetched }
+    func refresh() async throws -> [Creature] { refreshed }
+}

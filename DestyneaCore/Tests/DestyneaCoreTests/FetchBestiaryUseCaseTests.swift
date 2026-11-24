@@ -59,3 +59,17 @@ import Testing
         try await useCase.execute()
     }
 }
+
+@Test func executeUsesFetchByDefault() async throws {
+    let goblin = Creature.fixture(name: "Gobelin")
+    let useCase = FetchBestiaryUseCase(repository: RefreshableStubRepository(fetched: [goblin], refreshed: []))
+
+    #expect(try await useCase.execute() == [goblin])
+}
+
+@Test func forcedRefreshAsksRepositoryToRefresh() async throws {
+    let kraken = Creature.fixture(name: "Kraken", type: .boss)
+    let useCase = FetchBestiaryUseCase(repository: RefreshableStubRepository(fetched: [], refreshed: [kraken]))
+
+    #expect(try await useCase.execute(forceRefresh: true) == [kraken])
+}

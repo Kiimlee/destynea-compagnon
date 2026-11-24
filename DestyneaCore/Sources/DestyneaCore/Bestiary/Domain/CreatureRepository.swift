@@ -7,4 +7,11 @@
 
 public protocol CreatureRepository: Sendable {
     func fetch() async throws -> [Creature]
+    func refresh() async throws -> [Creature]
+}
+
+public extension CreatureRepository {
+    func refresh() async throws -> [Creature] {
+        try await fetch()
+    }
 }

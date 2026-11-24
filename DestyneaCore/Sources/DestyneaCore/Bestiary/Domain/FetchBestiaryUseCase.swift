@@ -14,8 +14,8 @@ public struct FetchBestiaryUseCase: Sendable {
         self.repository = repository
     }
     
-    public func execute() async throws -> [Creature] {
-        let creatures = try await repository.fetch()
+    public func execute(forceRefresh: Bool = false) async throws -> [Creature] {
+        let creatures = forceRefresh ? try await repository.refresh() : try await repository.fetch()
         let sortedCreatures = creatures.sorted { lhs, rhs in
             if lhs.type != rhs.type { return lhs.type < rhs.type }   // 1. le rang d'abord
             return lhs.name.localizedStandardCompare(rhs.name) == .orderedAscending // 2. puis le nom
