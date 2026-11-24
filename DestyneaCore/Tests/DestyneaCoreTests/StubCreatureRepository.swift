@@ -27,3 +27,18 @@ struct RefreshableStubRepository: CreatureRepository {
     func fetch() async throws -> [Creature] { fetched }
     func refresh() async throws -> [Creature] { refreshed }
 }
+
+/// Faux repository LENT (il attend un peu avant de répondre) qui compte ses appels :
+/// il laisse le temps à un 2ᵉ appel d'entrer pendant l'`await` du 1ᵉʳ (réentrance).
+actor SlowCreatureRepository: CreatureRepository {
+    let creatures: [Creature]
+    private(set) var fetchCount = 0
+
+    init(creatures: [Creature]) { self.creatures = creatures }
+
+    func fetch() async throws -> [Creature] {
+        fetchCount += 1
+        try await Task.sleep(for: .milliseconds(50))
+        return creatures
+    }
+}

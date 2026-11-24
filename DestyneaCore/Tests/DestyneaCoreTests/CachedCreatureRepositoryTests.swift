@@ -72,3 +72,16 @@ import Testing
 
     #expect(try await repository.refresh() == [goblin])
 }
+
+@Test func concurrentFetchesDownloadOnlyOnce() async throws {
+    let goblin = Creature.fixture(name: "Gobelin")
+    let wrapped = SlowCreatureRepository(creatures: [goblin])
+    let repository = CachedCreatureRepository(repository: wrapped)
+
+    async let first = repository.fetch()     // les deux appels partent EN MÊME TEMPS
+    async let second = repository.fetch()
+    let results = try await [first, second]
+
+    #expect(results == [[goblin], [goblin]])
+    #expect(await wrapped.fetchCount == 1)
+}
