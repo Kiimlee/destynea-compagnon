@@ -9,6 +9,7 @@ import SwiftUI
 import DestyneaCore
 
 struct CreatureDetailView: View {
+    @State private var resistancesSheetIsShown: Bool = false
     let creature: Creature
     
     var body: some View {
@@ -18,6 +19,9 @@ struct CreatureDetailView: View {
             descriptionSection
         }
         .navigationTitle(creature.name)
+        .sheet(isPresented: $resistancesSheetIsShown) {
+            ResistancesRulesView()
+        }
     }
     
     private var statsSection: some View {
@@ -33,9 +37,13 @@ struct CreatureDetailView: View {
     }
     
     private var resistancesSection: some View {
-        Section("Résistances") {
+        Section(content: {
             Text(creature.resistances.displayText)
-        }
+        }, header: {
+            Button("Résistances", systemImage: "info.circle", action: {
+                resistancesSheetIsShown = true
+            })
+        })
     }
     
     private var descriptionSection: some View {
