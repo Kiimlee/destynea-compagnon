@@ -14,4 +14,14 @@ public extension CreatureType {
         case .soldier: return "Fantassin"
         }
     }
+
+    /// Pour les en-têtes de section (« Sbires », « Élites »…).
+    var pluralDisplayName: String {
+        switch self {
+        case .boss: return "Boss"
+        case .elite: return "Élites"
+        case .minion: return "Sbires"
+        case .soldier: return "Fantassins"
+        }
+    }
 }

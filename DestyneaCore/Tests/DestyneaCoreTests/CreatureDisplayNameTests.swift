@@ -17,3 +17,13 @@ import Testing
 func rankDisplayNamesAreInFrench(type: CreatureType, displayName: String) {
     #expect(type.displayName == displayName)
 }
+
+@Test(arguments: [
+    (CreatureType.minion, "Sbires"),
+    (CreatureType.soldier, "Fantassins"),
+    (CreatureType.elite, "Élites"),
+    (CreatureType.boss, "Boss")
+])
+func rankPluralDisplayNamesAreInFrench(type: CreatureType, displayName: String) {
+    #expect(type.pluralDisplayName == displayName)
+}

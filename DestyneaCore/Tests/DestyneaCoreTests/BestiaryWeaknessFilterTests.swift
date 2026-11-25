@@ -22,7 +22,7 @@ private func loadedViewModel() async -> BestiaryViewModel {
     let viewModel = await loadedViewModel()
 
     #expect(viewModel.weaknessFilter == nil)
-    #expect(viewModel.visibleCreatures == [goblin, skeleton, kraken])
+    #expect(viewModel.visibleCreatures == [goblin, kraken, skeleton])   // A → Z par défaut
 }
 
 @MainActor
@@ -41,7 +41,7 @@ private func loadedViewModel() async -> BestiaryViewModel {
 
     viewModel.weaknessFilter = nil
 
-    #expect(viewModel.visibleCreatures == [goblin, skeleton, kraken])
+    #expect(viewModel.visibleCreatures == [goblin, kraken, skeleton])   // A → Z par défaut
 }
 
 @MainActor

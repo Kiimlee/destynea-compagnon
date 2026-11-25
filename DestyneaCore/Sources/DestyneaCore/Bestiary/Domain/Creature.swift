@@ -55,7 +55,7 @@ public struct Creature: Hashable, Sendable {
 }
 
 /// Le rang d'une créature. L'ordre des `case` définit l'ordre de tri (Comparable).
-public enum CreatureType: Hashable, Comparable, Sendable {
+public enum CreatureType: Hashable, Comparable, CaseIterable, Sendable {
     case minion
     case soldier
     case elite
