@@ -47,6 +47,11 @@ public struct Creature: Hashable, Sendable {
         self.capacities = capacities
         self.loots = loots
     }
+    
+    /// Règle du jeu : une valeur négative est une faiblesse. Un type absent compte comme neutre (0).
+    func isWeak(to damageType: DamageType) -> Bool {
+        (resistances[damageType] ?? 0) < 0
+    }
 }
 
 /// Le rang d'une créature. L'ordre des `case` définit l'ordre de tri (Comparable).
@@ -101,7 +106,7 @@ public enum CreatureSize: Hashable, Sendable {
     case xxl
 }
 
-public enum DamageType: Hashable, Comparable, Sendable {
+public enum DamageType: Hashable, Comparable, CaseIterable, Sendable {
     case piercing
     case bludgeoning
     case slashing

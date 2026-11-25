@@ -2,7 +2,7 @@
 
 extension Creature {
     /// Crée une créature de test : seuls le nom et le rang comptent pour la plupart des tests.
-    static func fixture(name: String = "Gobelin", type: CreatureType = .minion, hitPoints: ClosedRange<Int> = 2...4, successRate: ClosedRange<Int> = 40...50) -> Creature {
+    static func fixture(name: String = "Gobelin", type: CreatureType = .minion, hitPoints: ClosedRange<Int> = 2...4, successRate: ClosedRange<Int> = 40...50, resistances: [DamageType: Int] = [:]) -> Creature {
         Creature(
             name: name,
             type: type,
@@ -11,7 +11,7 @@ extension Creature {
             hitPoints: hitPoints,
             movementPoints: 5,
             successRate: successRate,
-            resistances: [:],
+            resistances: resistances,
             initiative: 0,
             description: "",
             capacities: [],
